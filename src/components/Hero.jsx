@@ -1,10 +1,33 @@
 import { motion } from "framer-motion";
 import { styles } from "../styles";
 import { TypeAnimation } from "react-type-animation";
-
+import { useState, useEffect } from "react";
 import { ComputersCanvas } from "./canvas";
 
 const Hero = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Add a listener for changes to the screen size
+    const mediaQuery = window.matchMedia("(max-width: 500px)");
+
+    // Set the initial value of the `isMobile` state variable
+    setIsMobile(mediaQuery.matches);
+
+    // Define a callback function to handle changes to the media query
+    const handleMediaQueryChange = (event) => {
+      setIsMobile(event.matches);
+    };
+
+    // Add the callback function as a listener for changes to the media query
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+
+    // Remove the listener when the component is unmounted
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
+  }, []);
+
   return (
     <section className={`relative w-full h-screen mx-auto `}>
       <div
@@ -17,14 +40,18 @@ const Hero = () => {
 
         <div className="z-10">
           <h1 className={`text-hover-active ${styles.heroHeadText}`}>
-            Hi, I'm {""}
-            <TypeAnimation
-              sequence={["Wilson", 1000, "a Devs", 1000, "coders", 1000]}
-              wrapper="span"
-              speed={50}
-              repeat={Infinity}
-              className="text-[#213555] inline-block"
-            />
+            Hi, I'm{" "}
+            {isMobile ? (
+              "Wilson "
+            ) : (
+              <TypeAnimation
+                sequence={["Wilson", 1000, "a Devs", 1000, "coders", 1000]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+                className="text-[#213555] inline-block"
+              />
+            )}
           </h1>
           <p
             className={`${styles.heroSubText} mt-5 text-hover-active rounded-xl`}
