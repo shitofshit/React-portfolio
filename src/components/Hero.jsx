@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-
 import { styles } from "../styles";
+import { TypeAnimation } from "react-type-animation";
+
 import { ComputersCanvas } from "./canvas";
 
 const Hero = () => {
@@ -15,8 +16,15 @@ const Hero = () => {
         </div>
 
         <div className="z-10">
-          <h1 className={`text-hover-active ${styles.heroHeadText} `}>
-            Hi, I'm <span className="text-[#213555]">Wilson</span>
+          <h1 className={`text-hover-active ${styles.heroHeadText}`}>
+            Hi, I'm {""}
+            <TypeAnimation
+              sequence={["Wilson", 1000, "a Devs", 1000, "coders", 1000]}
+              wrapper="span"
+              speed={50}
+              repeat={Infinity}
+              className="text-[#213555] inline-block"
+            />
           </h1>
           <p
             className={`${styles.heroSubText} mt-5 text-hover-active rounded-xl`}
@@ -28,7 +36,9 @@ const Hero = () => {
             application and programs.
           </p>
           <button className="text-white h-10 w-auto bg-[#213555] rounded-xl bg-opacity-90 text-[15px] font-bold mt-7 px-4">
-            <a>Download My CV now!</a>
+            <a href="../assets/wilsoncv.pdf" download>
+              Download My CV now!
+            </a>
           </button>
         </div>
       </div>
