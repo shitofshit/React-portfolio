@@ -36,7 +36,7 @@ const Hero = () => {
             application and programs.
           </p>
           <button className="text-white h-10 w-auto bg-[#213555] rounded-xl bg-opacity-90 text-[15px] font-bold mt-7 px-4">
-            <a href="../assets/wilsoncv.pdf" download>
+            <a href="wilsoncv.pdf" download="ChinCheeSeng_Developer_CV">
               Download My CV now!
             </a>
           </button>
